@@ -1,5 +1,5 @@
 import { Canvas } from "@react-three/fiber";
-import Experience from "./Experience";
+import Experience from "./components/Experience";
 import { NoToneMapping } from "three";
 
 const App = () => {

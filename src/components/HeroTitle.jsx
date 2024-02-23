@@ -1,26 +1,18 @@
 import { Image, RoundedBox, Text, useTexture } from "@react-three/drei";
-import { useThree } from "@react-three/fiber";
-import React from "react";
+import { useFrame, useThree } from "@react-three/fiber";
+import React, { forwardRef, useRef } from "react";
 import { DoubleSide } from "three";
+import { CurvedPlane1 } from "./CurvedPlane1";
+import { CurvedPlane2 } from "./CurvedPlane2";
 
-export default function HeroTitle() {
+const HeroTitle = forwardRef(function ({}, ref) {
 	const { viewport } = useThree();
 	const shared = { font: "/ClashDisplay-Medium.ttf", color: "black", anchorX: "center", fontSize: 1.2 };
-	const texture = useTexture("/hero-2.png");
 
 	return (
-		<group>
-			{/* <mesh position={[2, viewport.height * 0.22, 0]}>
-				<planeGeometry args={[4, 1]} />
-				<meshBasicMaterial map={texture} side={DoubleSide} />
-			</mesh> */}
-			<Image url={"/hero-2.png"} transparent side={DoubleSide}>
-				<bentPlaneGeometry args={[0.1, 1, 1, 20, 20]} />
-			</Image>
-			<mesh position={[-3.2, 0, 0]}>
-				<planeGeometry args={[2.5, 1]} />
-				<meshBasicMaterial map={texture} side={DoubleSide} />
-			</mesh>
+		<group ref={ref}>
+			<CurvedPlane1 position={[2.3, viewport.height * 0.22, 0]} scale={0.8} />
+			<CurvedPlane2 position={[-3, 0, 0]} scale={0.7} />
 			<Text position={[-2.5, viewport.height * 0.22, 0]} {...shared}>
 				We are
 			</Text>
@@ -35,4 +27,6 @@ export default function HeroTitle() {
 			</Text>
 		</group>
 	);
-}
+});
+
+export default HeroTitle;

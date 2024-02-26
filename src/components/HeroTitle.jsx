@@ -1,28 +1,27 @@
-import { Image, RoundedBox, Text, useTexture } from "@react-three/drei";
-import { useFrame, useThree } from "@react-three/fiber";
-import React, { forwardRef, useRef } from "react";
-import { DoubleSide } from "three";
+import { Text } from "@react-three/drei";
+import { useThree } from "@react-three/fiber";
+import React, { forwardRef } from "react";
 import { CurvedPlane1 } from "./CurvedPlane1";
 import { CurvedPlane2 } from "./CurvedPlane2";
 
 const HeroTitle = forwardRef(function ({}, ref) {
 	const { viewport } = useThree();
-	const shared = { font: "/ClashDisplay-Medium.ttf", color: "black", anchorX: "center", fontSize: 1.2 };
+	const shared = { font: "/ClashDisplay-Medium.ttf", color: "white", anchorX: "center" };
 
 	return (
-		<group ref={ref}>
-			<CurvedPlane1 position={[2.3, viewport.height * 0.22, 0]} scale={0.8} />
-			<CurvedPlane2 position={[-3, 0, 0]} scale={0.7} />
-			<Text position={[-2.5, viewport.height * 0.22, 0]} {...shared}>
+		<group ref={ref} scale={viewport.width * 0.11}>
+			<CurvedPlane1 scale={0.7} position={[2, 1.2, 0]} />
+			<CurvedPlane2 scale={0.7} position={[-2.3, 0, 0]} />
+			<Text {...shared} position={[-2, 1.2, 0]}>
 				We are
 			</Text>
-			<Text position={[1.5, 0, 0]} {...shared}>
+			<Text position={[1.4, 0, 0]} {...shared}>
 				Creative
 			</Text>
-			<Text position={[-2.5, viewport.height * -0.22, 0]} {...shared}>
+			<Text {...shared} position={[-2.1, -1.2, 0]}>
 				Design
 			</Text>
-			<Text position={[2.175, viewport.height * -0.22, 0]} {...shared}>
+			<Text {...shared} position={[1.95, -1.2, 0]}>
 				Studio
 			</Text>
 		</group>

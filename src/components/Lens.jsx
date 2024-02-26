@@ -10,6 +10,7 @@ export function Lens({ children, damping = 0.15, ...props }) {
 	const buffer = useFBO();
 	const viewport = useThree((state) => state.viewport);
 	const [scene] = useState(() => new Scene());
+	console.log(viewport.width);
 	useFrame((state, delta) => {
 		// Tie lens to the pointer
 		// getCurrentViewport gives us the width & height that would fill the screen in threejs units
@@ -27,7 +28,7 @@ export function Lens({ children, damping = 0.15, ...props }) {
 		// The following code will render that scene into a buffer, whose texture will then be fed into
 		// a plane spanning the full screen and the lens transmission material
 		state.gl.setRenderTarget(buffer);
-		state.gl.setClearColor("#ffffff");
+		state.gl.setClearColor("#121212");
 		state.gl.render(scene, state.camera);
 		state.gl.setRenderTarget(null);
 	});
@@ -40,20 +41,18 @@ export function Lens({ children, damping = 0.15, ...props }) {
 				<meshBasicMaterial map={buffer.texture} />
 			</mesh>
 			<mesh
-				scale={1}
+				scale={viewport.width > 4.5 ? viewport.width * 0.074 : viewport.width * 0.15}
 				ref={ref}
 				rotation-x={Math.PI / 2}
-				// geometry={new SphereGeometry(1, 64, 64)}
 				geometry={nodes.Cylinder.geometry}
 				{...props}>
 				<MeshTransmissionMaterial
 					buffer={buffer.texture}
-					transmission={1}
 					ior={1.2}
-					roughness={0.05}
-					thickness={1.75}
+					roughness={0.01}
+					thickness={1.5}
 					anisotropy={0.1}
-					chromaticAberration={0.04}
+					chromaticAberration={0.05}
 				/>
 			</mesh>
 		</>

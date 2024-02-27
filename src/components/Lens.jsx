@@ -10,7 +10,6 @@ export function Lens({ children, damping = 0.15, ...props }) {
 	const buffer = useFBO();
 	const viewport = useThree((state) => state.viewport);
 	const [scene] = useState(() => new Scene());
-	console.log(viewport.width);
 	useFrame((state, delta) => {
 		// Tie lens to the pointer
 		// getCurrentViewport gives us the width & height that would fill the screen in threejs units
